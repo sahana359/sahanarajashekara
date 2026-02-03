@@ -1,0 +1,19 @@
+{
+  "name": "Jackie",
+  "breed": "Indie",
+  "birthday": "29 January, 2018",
+  "personality": [
+    "Playful",
+    "Goodest Boy",
+    "Grumpy",
+    "Possessive"
+  ],
+  "likes": [
+    "Chicken",
+    "Carrot",
+    "Ball",
+    "Sun Bathing"
+  ],
+  "dislikes": [],
+  "image": null
+}

@@ -17,10 +17,12 @@ function App() {
       <Landing />
 
       {/* Content Section - snaps, then scrolls normally inside */}
+
       <section
-        className="h-screen snap-start bg-fixed bg-cover bg-center"
+        className="h-screen snap-start bg-cover bg-center bg-no-repeat bg-scroll md:bg-fixed"
         style={{ backgroundImage: "url('/images/bg-plain.png')" }}
       >
+
         <div className="h-full overflow-y-auto">
           <div className="bg-black/50">
             <div id="about"><AboutMe /></div>

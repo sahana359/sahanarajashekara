@@ -2,46 +2,44 @@ import adventuresData from '../data/json/adventures.json';
 
 function Adventures() {
     return (
-        <div className="px-8 pl-32 py-8">
+        <div className="px-6 md:px-8 md:pl-32 py-8">
             <h2
-                className="text-4xl font-semibold text-white mb-12"
+                className="text-3xl md:text-4xl font-semibold text-white mb-8 md:mb-12"
                 style={{ letterSpacing: '0.08em' }}
             >
                 Adventures
             </h2>
 
-            
-
             {/* Descriptions Below */}
-            <div className="space-y-8 pr-24">
+            <div className="space-y-6 md:space-y-8 pr-0 md:pr-24">
                 {adventuresData.adventures.map((adventure) => (
                     <div
                         key={adventure.id}
-                        className="p-6 rounded-2xl"
+                        className="p-4 md:p-6 rounded-2xl"
                         style={{
                             background: 'linear-gradient(135deg, rgba(48, 105, 153, 0.15), rgba(20, 30, 48, 0.3))',
                             border: '1px solid rgba(100, 160, 200, 0.2)'
                         }}
                     >
-                        <div className="flex justify-between items-start mb-3">
+                        <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
                             <div>
-                                <h3 className="text-xl font-semibold text-white">
+                                <h3 className="text-lg md:text-xl font-semibold text-white">
                                     {adventure.title}
                                 </h3>
                                 <p
-                                    className="text-lg mt-1"
+                                    className="text-base md:text-lg mt-1"
                                     style={{ color: 'rgba(100, 160, 200, 0.9)' }}
                                 >
                                     {adventure.institution}
                                 </p>
                             </div>
-                            <div className="text-right text-gray-400">
+                            <div className="text-left md:text-right text-gray-400 text-sm md:text-base mt-2 md:mt-0">
                                 <p>{adventure.location}</p>
                                 <p>{adventure.date}</p>
                             </div>
                         </div>
 
-                        <p className="text-gray-300 mb-4">
+                        <p className="text-gray-300 text-sm md:text-base mb-4">
                             {adventure.description}
                         </p>
 
@@ -65,7 +63,7 @@ function Adventures() {
             </div>
 
             {/* Polaroids Row */}
-            <div className="flex gap-12 mb-16 flex-wrap pt-12">
+            <div className="flex gap-6 md:gap-12 mb-8 md:mb-16 flex-wrap pt-8 md:pt-12 justify-center md:justify-start">
                 {adventuresData.adventures.map((adventure) => (
                     adventure.images?.map((image, imgIndex) => (
                         <div
@@ -77,14 +75,14 @@ function Adventures() {
                         >
                             {/* Polaroid */}
                             <div
-                                className="p-3 shadow-xl"
+                                className="p-2 md:p-3 shadow-xl"
                                 style={{
                                     background: 'linear-gradient(145deg, #f5f5f5e8, #e0e0e0be)',
                                     boxShadow: '0 10px 30px rgba(0, 0, 0, 0.4)'
                                 }}
                             >
                                 {/* Image */}
-                                <div className="w-56 h-56 overflow-hidden">
+                                <div className="w-40 h-40 md:w-56 md:h-56 overflow-hidden">
                                     <img
                                         src={image}
                                         alt={`${adventure.activity} ${imgIndex + 1}`}
@@ -94,8 +92,8 @@ function Adventures() {
 
                                 {/* Polaroid Caption */}
                                 <p
-                                    className="text-center mt-3 text-gray-700"
-                                    style={{ fontFamily: 'cursive', fontSize: '14px' }}
+                                    className="text-center mt-2 md:mt-3 text-gray-700 text-xs md:text-sm"
+                                    style={{ fontFamily: 'cursive' }}
                                 >
                                     {adventure.activity} - {adventure.date}
                                 </p>

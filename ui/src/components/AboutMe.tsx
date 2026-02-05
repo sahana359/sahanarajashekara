@@ -2,27 +2,27 @@ import aboutData from '../data/json/about.json';
 
 function AboutMe() {
     return (
-        <div className="px-8 pl-32 py-8">
-            <div className="flex items-center gap-16">
+        <div className="px-6 md:px-8 md:pl-32 py-8">
+            <div className="flex items-center gap-8 md:gap-16">
                 {/* Text */}
                 <div className="flex-1">
                     <h2
-                        className="text-4xl font-semibold text-white mb-4"
+                        className="text-3xl md:text-4xl font-semibold text-white mb-4"
                         style={{ letterSpacing: '0.08em' }}
                     >
                         About Me
                     </h2><br/>
                     {/* Photo */}
-                    <div className="flex items-start gap-20">
+                    <div className="flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-20">
                         <div className="flex-shrink-0">
                             <img
                                 src="/images/profile-picture.jpeg"
                                 alt={`${aboutData.firstName} ${aboutData.lastName}`}
-                                className="w-64 h-64 object-cover rounded-2xl"
+                                className="w-48 h-48 md:w-64 md:h-64 object-cover rounded-2xl"
                             />
                             
                             {/* Social Links */}
-                            <div className="flex pl-7 gap-4 mt-6 items-center">
+                            <div className="flex justify-center md:pl-7 gap-4 mt-6 items-center">
                                 <a 
                                     href={aboutData.contact.linkedin}
                                     target="_blank"
@@ -66,13 +66,7 @@ function AboutMe() {
                             </div>
                         </div>
                         <div className="flex-1">
-                            <p className="text-lg px-6 py-6 text-gray-300 leading-relaxed rounded-2xl"
-                            // className="p-6 "
-                        // style={{ 
-                        //     background: 'linear-gradient(135deg, rgba(48, 105, 153, 0.15), rgba(20, 30, 48, 0.3))',
-                        //     border: '1px solid rgba(100, 160, 200, 0.2)'
-                        // }}
-                        >
+                            <p className="text-base md:text-lg px-4 md:px-6 py-4 md:py-6 text-gray-300 leading-relaxed rounded-2xl text-center md:text-left">
                                 {aboutData.summary}
                             </p>
                         </div>

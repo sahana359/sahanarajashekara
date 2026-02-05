@@ -2,40 +2,40 @@ import educationData from '../data/json/education.json';
 
 function Education() {
     return (
-        <div className="pt-4 px-8 pl-32 py-8">
+        <div className="pt-4 px-4 sm:px-8 md:px-16 lg:px-32 py-6 sm:py-8">
             <h2
-                className="text-4xl font-semibold text-white my-4"
+                className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-white my-4 sm:my-6"
                 style={{ letterSpacing: '0.08em' }}
             >
                 Education
             </h2>
 
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
                 {educationData.education.map((edu) => (
                     <div 
                         key={edu.id}
-                        className="p-6 rounded-2xl"
+                        className="p-4 sm:p-6 rounded-xl sm:rounded-2xl"
                         style={{ 
                             background: 'linear-gradient(135deg, rgba(48, 105, 153, 0.15), rgba(20, 30, 48, 0.3))',
                             border: '1px solid rgba(100, 160, 200, 0.2)'
                         }}
                     >
                         {/* Top - Degree & Institution */}
-                        <div className="mb-6">
-                            <h3 className="text-xl font-semibold text-white">
+                        <div className="mb-4 sm:mb-6">
+                            <h3 className="text-lg sm:text-xl font-semibold text-white leading-tight">
                                 {edu.degree} in {edu.field}
                             </h3>
                             <p 
-                                className="text-lg mt-1"
+                                className="text-base sm:text-lg mt-2"
                                 style={{ color: 'rgba(100, 160, 200, 0.9)' }}
                             >
                                 {edu.institution}
                             </p>
-                            <p className="text-gray-400 mt-1">
+                            <p className="text-sm sm:text-base text-gray-400 mt-1 sm:mt-2">
                                 {edu.location} • {edu.startDate} - {edu.endDate}
                             </p>
                             {edu.gpa && (
-                                <p className="text-gray-300 mt-2">
+                                <p className="text-sm sm:text-base text-gray-300 mt-2">
                                     GPA: <span className="text-white font-medium">{edu.gpa}</span>
                                 </p>
                             )}
@@ -43,12 +43,14 @@ function Education() {
 
                         {/* Bottom - Courses */}
                         <div>
-                            <p className="text-gray-400 mb-3">Relevant Coursework</p>
+                            <p className="text-sm sm:text-base text-gray-400 mb-2 sm:mb-3">
+                                Relevant Coursework
+                            </p>
                             <div className="flex flex-wrap gap-2">
                                 {edu.courses.map((course, index) => (
                                     <span 
                                         key={index}
-                                        className="px-3 py-1 text-sm text-gray-300 rounded-lg"
+                                        className="px-2.5 sm:px-3 py-1 text-xs sm:text-sm text-gray-300 rounded-lg"
                                         style={{ background: 'rgba(48, 105, 153, 0.3)' }}
                                     >
                                         {course}

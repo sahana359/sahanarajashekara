@@ -1,6 +1,6 @@
 function Divider() {
     return (
-        <div className="px-8 pl-32 pr-32">
+        <div className="px-4 sm:px-8 md:px-16 lg:px-32">
             <div 
                 className="h-px"
                 style={{ 

@@ -8,6 +8,7 @@ import Adventures from './components/Adventures';
 import Certificates from './components/Certificates';
 import Jackie from './components/Jackie';
 import Divider from './components/Divider';
+import ChatWidget from './components/ChatWidget';
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           </div>
         </div>
       </section>
+      <ChatWidget />
     </div>
   );
 }

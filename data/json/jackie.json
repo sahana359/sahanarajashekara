@@ -11,9 +11,9 @@
   "likes": [
     "Chicken",
     "Carrot",
-    "Ball",
+    "Balls",
     "Sun Bathing"
   ],
   "dislikes": [],
-  "image": null
+  "images": ["images/jackie1.JPG", "images/jackie2.jpg"]
 }

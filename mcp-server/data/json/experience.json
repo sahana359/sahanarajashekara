@@ -1,0 +1,103 @@
+{
+  "experience": [
+     {
+      "id": "mphasis-swe",
+      "company": "Mphasis",
+      "role": "Software Engineer",
+      "course": null,
+      "type": "full-time",
+      "location": "Bangalore, KA",
+      "startDate": "September, 2021",
+      "endDate": "December, 2023",
+      "description": "Engineered full-stack e-commerce web applications and led technology migrations.",
+      "responsibilities": [
+        "Engineered full-stack e-commerce web applications using Java, Svelte, Spring Boot, SOAP, and REST API",
+        "Led technology migration from Angular to Svelte, building the application from the ground up, resulting in a 45% reduction in build size of web components",
+        "Improved application performance by optimizing backend processing through multithreading and caching, achieving a 66% reduction in processing time",
+        "Developed UIaaS (User Interface as a Service) web components and backend REST APIs for full-tech product search with filtering, add-to-cart, pagination, and bulk document downloads for 500+ products",
+        "Implemented ESAPI (Enterprise Security API) library to mitigate XSS vulnerabilities, enhancing cybersecurity resilience"
+      ],
+      "technologies": [
+        "Java",
+        "Svelte",
+        "Angular",
+        "Spring Boot",
+        "REST API",
+        "SOAP",
+        "Multithreading",
+        "Caching",
+        "ESAPI"
+      ],
+      "achievements": [
+        {
+          "metric": "45%",
+          "description": "Reduction in build size after Angular to Svelte migration"
+        },
+        {
+          "metric": "66%",
+          "description": "Reduction in processing time through backend optimization"
+        },
+        {
+          "metric": "500+",
+          "description": "Products supported in UIaaS components"
+        }
+      ]
+    },
+    {
+      "id": "neu-ta-cpp",
+      "company": "Northeastern University",
+      "role": "Teaching Assistant",
+      "course": "Programming with C++",
+      "type": "part-time",
+      "location": "Boston, MA",
+      "startDate": "May, 2025",
+      "endDate": "June, 2025",
+      "description": "Teaching Assistant for C++ programming course, mentoring 100+ students.",
+      "responsibilities": [
+        "Led hands-on sessions demonstrating OpenCV techniques for image classification and manipulation using C++",
+        "Mentored over 100 students in modern C++ features and best coding practices",
+        "Hosted office hours and guided students through advanced C++ concepts including pointers, STL, OOP, UML, and multithreading",
+        "Graded weekly programming assignments and exercises via Linux server and Replit"
+      ],
+      "technologies": [
+        "C++",
+        "OpenCV",
+        "STL",
+        "Linux",
+        "Replit"
+      ],
+      "achievements": [
+        {
+          "metric": "100+",
+          "description": "Students mentored in modern C++ features"
+        }
+      ]
+    },
+    {
+      "id": "neu-ta-fse",
+      "company": "Northeastern University",
+      "role": "Teaching Assistant",
+      "course": "Fundamentals of Software Engineering",
+      "type": "part-time",
+      "location": "Boston, MA",
+      "startDate": "August, 2025",
+      "endDate": "December, 2025",
+      "description": "Teaching Assistant for full-stack development course covering React, Express, and MongoDB.",
+      "responsibilities": [
+        "Hosted office hours and guided students on full-stack development with React (TypeScript), Express, and MongoDB",
+        "Mentored student groups through sprint reviews and provided feedback on user stories and project deliverables",
+        "Developed starter code and created database schema design for assignments",
+        "Created test suites with Jest and Cypress to ensure backend APIs and frontend components functioned consistently and reliably"
+      ],
+      "technologies": [
+        "React",
+        "TypeScript",
+        "Express",
+        "MongoDB",
+        "Jest",
+        "Cypress"
+      ],
+      "achievements": []
+    }
+  ]
+}

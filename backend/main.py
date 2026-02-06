@@ -7,8 +7,6 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import anthropic
-from mcp import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
@@ -21,9 +19,16 @@ limiter = Limiter(key_func=get_remote_address)
 # Store MCP data globally after loading
 portfolio_data = {}
 
+# Detect if running on Vercel
+IS_VERCEL = os.getenv("VERCEL") == "1"
+
 async def load_mcp_data():
-    """Load all data from MCP server at startup."""
+    """Load all data from MCP server at startup (LOCAL ONLY)."""
     global portfolio_data
+    
+    # Import MCP only for local development
+    from mcp import ClientSession, StdioServerParameters
+    from mcp.client.stdio import stdio_client
     
     server_params = StdioServerParameters(
         command="uv",
@@ -47,10 +52,36 @@ async def load_mcp_data():
     
     print("Portfolio data loaded from MCP server")
 
+def load_json_data():
+    """Load all data from JSON files directly (VERCEL)."""
+    global portfolio_data
+    
+    # Path to data directory
+    data_dir = Path(__file__).parent / "data" / "json"
+    
+    resources = ["about", "education", "experience", "projects", "skills", 
+                 "certificates", "adventures", "jackie"]
+    
+    for resource in resources:
+        try:
+            file_path = data_dir / f"{resource}.json"
+            with open(file_path, 'r') as f:
+                portfolio_data[resource] = json.load(f)
+            print(f"Loaded {resource}.json")
+        except Exception as e:
+            print(f"Warning: Could not load {resource}: {e}")
+    
+    print(f"Portfolio data loaded from JSON files: {len(portfolio_data)} resources")
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Load MCP data on startup."""
-    await load_mcp_data()
+    """Load portfolio data on startup based on environment."""
+    if IS_VERCEL:
+        print("Running on Vercel - loading data from JSON files")
+        load_json_data()
+    else:
+        print("Running locally - loading data from MCP server")
+        await load_mcp_data()
     yield
 
 app = FastAPI(title="Portfolio Chat API", lifespan=lifespan)
@@ -60,7 +91,13 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 # CORS for frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "https://*.vercel.app"],
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://*.vercel.app",
+        # Add your specific frontend URL here for better security:
+        # "https://your-frontend-app.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -158,7 +195,9 @@ async def chat(request: Request, chat_request: ChatRequest):
 async def health():
     return {
         "status": "healthy",
-        "data_loaded": bool(portfolio_data)
+        "data_loaded": bool(portfolio_data),
+        "environment": "vercel" if IS_VERCEL else "local",
+        "resources": list(portfolio_data.keys())
     }
 
 if __name__ == "__main__":

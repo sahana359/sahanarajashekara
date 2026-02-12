@@ -5,15 +5,31 @@ from contextlib import asynccontextmanager
 from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-import anthropic
-from slowapi import Limiter, _rate_limit_exceeded_handler
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel, Field
+from typing import Any
+
+from anthropic import AsyncAnthropic
+from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 
 load_dotenv()
 
-limiter = Limiter(key_func=get_remote_address)
+# Redis-backed rate limiter for persistence across serverless invocations
+REDIS_URL = os.getenv("REDIS_URL")
+
+if REDIS_URL:
+    limiter = Limiter(
+        key_func=get_remote_address,
+        storage_uri=REDIS_URL
+    )
+    print("Rate limiter using Redis storage")
+else:
+    # Fallback to in-memory for local development
+    limiter = Limiter(key_func=get_remote_address)
+    print("Warning: No REDIS_URL found, using in-memory rate limiting")
+
 portfolio_data = {}
 
 IS_VERCEL = os.getenv("VERCEL") == "1"
@@ -28,9 +44,9 @@ async def load_from_remote_mcp():
     print("Connecting to MCP server...")
     async with Client(f"{MCP_SERVER_URL}/sse") as client:
         print("Connected to MCP server. Fetching resources...")
-        resources = ["about", "education", "experience", "projects", 
+        resources = ["about", "education", "experience", "projects",
                      "skills", "certificates", "adventures", "jackie"]
-        
+
         for resource in resources:
             try:
                 print(f"Fetching resource: {resource}")
@@ -39,7 +55,7 @@ async def load_from_remote_mcp():
                 print(f"Successfully loaded resource: {resource}")
             except Exception as e:
                 print(f"Warning: Could not load {resource}: {e}")
-    
+
     print(f"Loaded {len(portfolio_data)} resources from MCP server")
 
 
@@ -47,10 +63,10 @@ def load_json_data():
     """Fallback: Load from JSON files."""
     global portfolio_data
     data_dir = Path(__file__).parent / "data" / "json"
-    
-    resources = ["about", "education", "experience", "projects", 
+
+    resources = ["about", "education", "experience", "projects",
                  "skills", "certificates", "adventures", "jackie"]
-    
+
     for resource in resources:
         try:
             with open(data_dir / f"{resource}.json", 'r') as f:
@@ -72,7 +88,22 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="Portfolio Chat API", lifespan=lifespan)
 app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+
+# ✅ Removed: app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+# Custom handler
+@app.exception_handler(RateLimitExceeded)
+async def custom_rate_limit_handler(request: Request, exc: RateLimitExceeded):
+    return JSONResponse(
+        status_code=429,
+        content={"detail": "Rate limit exceeded: 5 requests per day"},
+        headers={
+            "Access-Control-Allow-Origin": request.headers.get("origin", "*"),
+            "Access-Control-Allow-Credentials": "true",
+        }
+    )
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -86,12 +117,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+# ✅ Use async Anthropics client
+client = AsyncAnthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
 
 class ChatRequest(BaseModel):
     message: str
-    history: list = []
+    # ✅ Fix: avoid shared default list
+    history: list[dict[str, Any]] = Field(default_factory=list)
 
 
 class ChatResponse(BaseModel):
@@ -148,29 +181,28 @@ async def root():
 async def chat(request: Request, chat_request: ChatRequest):
     try:
         messages = []
-        
+
         for msg in chat_request.history:
             messages.append({
                 "role": msg.get("role", "user"),
                 "content": msg.get("content", "")
             })
-        
+
         messages.append({
             "role": "user",
             "content": chat_request.message
         })
-        
-        response = client.messages.create(
+
+        # ✅ await async call
+        response = await client.messages.create(
             model="claude-sonnet-4-20250514",
             max_tokens=1024,
             system=build_system_prompt(),
             messages=messages
         )
-        
+
         return ChatResponse(response=response.content[0].text)
-    
-    except anthropic.APIError as e:
-        raise HTTPException(status_code=500, detail=f"Claude API error: {str(e)}")
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -181,7 +213,8 @@ async def health():
         "status": "healthy",
         "data_loaded": bool(portfolio_data),
         "data_source": "mcp" if MCP_SERVER_URL else "json",
-        "resources": list(portfolio_data.keys())
+        "resources": list(portfolio_data.keys()),
+        "rate_limit_storage": "redis" if REDIS_URL else "memory"
     }
 
 

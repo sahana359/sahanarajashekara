@@ -1,6 +1,14 @@
 import json
 from pathlib import Path
-from mcp.server.fastmcp import FastMCP
+from fastmcp import FastMCP
+import asyncio
+import logging
+import os
+
+# Keep all your existing imports and code (FastMCP, DATA_DIR, load_json, resources, tools, prompts)
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(format="[%(levelname)s]: %(message)s", level=logging.INFO)
 
 # Initialize FastMCP server
 mcp = FastMCP("Portfolio MCP Server")
@@ -260,7 +268,15 @@ Provide a detailed, engaging explanation of this project."""
 
 
 def main():
-    mcp.run(transport="sse")
+    port = int(os.getenv("PORT", 8080))
+    logger.info(f"🚀 MCP server started on port {port}")
+    asyncio.run(
+        mcp.run_async(
+            transport="sse",
+            host="0.0.0.0",
+            port=port,
+        )
+    )
 
 if __name__ == "__main__":
     main()

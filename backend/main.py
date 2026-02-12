@@ -24,15 +24,19 @@ async def load_from_remote_mcp():
     """Load data from remote MCP server."""
     global portfolio_data
     from fastmcp import Client
-    
+
+    print("Connecting to MCP server...")
     async with Client(f"{MCP_SERVER_URL}/sse") as client:
+        print("Connected to MCP server. Fetching resources...")
         resources = ["about", "education", "experience", "projects", 
                      "skills", "certificates", "adventures", "jackie"]
         
         for resource in resources:
             try:
+                print(f"Fetching resource: {resource}")
                 result = await client.read_resource(f"portfolio://{resource}")
                 portfolio_data[resource] = json.loads(result[0].text)
+                print(f"Successfully loaded resource: {resource}")
             except Exception as e:
                 print(f"Warning: Could not load {resource}: {e}")
     

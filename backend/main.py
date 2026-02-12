@@ -13,105 +13,86 @@ from slowapi.errors import RateLimitExceeded
 
 load_dotenv()
 
-# Rate limiter
 limiter = Limiter(key_func=get_remote_address)
-
-# Store MCP data globally after loading
 portfolio_data = {}
 
-# Detect if running on Vercel
 IS_VERCEL = os.getenv("VERCEL") == "1"
+MCP_SERVER_URL = os.getenv("MCP_SERVER_URL", "")
 
-async def load_mcp_data():
-    """Load all data from MCP server at startup (LOCAL ONLY)."""
+
+async def load_from_remote_mcp():
+    """Load data from remote MCP server."""
     global portfolio_data
+    from fastmcp import Client
     
-    # Import MCP only for local development
-    from mcp import ClientSession, StdioServerParameters
-    from mcp.client.stdio import stdio_client
+    async with Client(f"{MCP_SERVER_URL}/sse") as client:
+        resources = ["about", "education", "experience", "projects", 
+                     "skills", "certificates", "adventures", "jackie"]
+        
+        for resource in resources:
+            try:
+                result = await client.read_resource(f"portfolio://{resource}")
+                portfolio_data[resource] = json.loads(result[0].text)
+            except Exception as e:
+                print(f"Warning: Could not load {resource}: {e}")
     
-    server_params = StdioServerParameters(
-        command="uv",
-        args=["run", "python", "server.py"],
-        cwd=str(Path(__file__).parent.parent / "mcp-server")
-    )
-    
-    async with stdio_client(server_params) as (read, write):
-        async with ClientSession(read, write) as session:
-            await session.initialize()
-            
-            # Load all resources
-            resources = ["about", "education", "experience", "projects", "skills", "certificates", "adventures", "jackie"]
-            
-            for resource in resources:
-                try:
-                    result = await session.read_resource(f"portfolio://{resource}")
-                    portfolio_data[resource] = json.loads(result.contents[0].text)
-                except Exception as e:
-                    print(f"Warning: Could not load {resource}: {e}")
-    
-    print("Portfolio data loaded from MCP server")
+    print(f"Loaded {len(portfolio_data)} resources from MCP server")
+
 
 def load_json_data():
-    """Load all data from JSON files directly (VERCEL)."""
+    """Fallback: Load from JSON files."""
     global portfolio_data
-    
-    # Path to data directory
     data_dir = Path(__file__).parent / "data" / "json"
     
-    resources = ["about", "education", "experience", "projects", "skills", 
-                 "certificates", "adventures", "jackie"]
+    resources = ["about", "education", "experience", "projects", 
+                 "skills", "certificates", "adventures", "jackie"]
     
     for resource in resources:
         try:
-            file_path = data_dir / f"{resource}.json"
-            with open(file_path, 'r') as f:
+            with open(data_dir / f"{resource}.json", 'r') as f:
                 portfolio_data[resource] = json.load(f)
-            print(f"Loaded {resource}.json")
         except Exception as e:
             print(f"Warning: Could not load {resource}: {e}")
-    
-    print(f"Portfolio data loaded from JSON files: {len(portfolio_data)} resources")
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """Load portfolio data on startup based on environment."""
-    if IS_VERCEL:
-        print("Running on Vercel - loading data from JSON files")
-        load_json_data()
+    if MCP_SERVER_URL:
+        print(f"Loading from MCP server: {MCP_SERVER_URL}")
+        await load_from_remote_mcp()
     else:
-        print("Running locally - loading data from MCP server")
-        await load_mcp_data()
+        print("No MCP_SERVER_URL - falling back to JSON files")
+        load_json_data()
     yield
+
 
 app = FastAPI(title="Portfolio Chat API", lifespan=lifespan)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
-# CORS for frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
         "http://localhost:3000",
         "https://*.vercel.app",
-        # Add your specific frontend URL here for better security:
-        # "https://your-frontend-app.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Anthropic client
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+
 
 class ChatRequest(BaseModel):
     message: str
     history: list = []
 
+
 class ChatResponse(BaseModel):
     response: str
+
 
 def build_system_prompt() -> str:
     """Build system prompt with portfolio data."""
@@ -152,31 +133,29 @@ Guidelines:
 - You can suggest relevant projects or experiences based on what visitors are looking for
 """
 
+
 @app.get("/")
 async def root():
     return {"status": "Portfolio Chat API is running"}
 
+
 @app.post("/chat", response_model=ChatResponse)
-@limiter.limit("5/day")  # 5 requests per day per IP
+@limiter.limit("5/day")
 async def chat(request: Request, chat_request: ChatRequest):
     try:
-        # Build messages
         messages = []
         
-        # Add history
         for msg in chat_request.history:
             messages.append({
                 "role": msg.get("role", "user"),
                 "content": msg.get("content", "")
             })
         
-        # Add current message
         messages.append({
             "role": "user",
             "content": chat_request.message
         })
         
-        # Call Claude
         response = client.messages.create(
             model="claude-sonnet-4-20250514",
             max_tokens=1024,
@@ -191,14 +170,16 @@ async def chat(request: Request, chat_request: ChatRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+
 @app.get("/health")
 async def health():
     return {
         "status": "healthy",
         "data_loaded": bool(portfolio_data),
-        "environment": "vercel" if IS_VERCEL else "local",
+        "data_source": "mcp" if MCP_SERVER_URL else "json",
         "resources": list(portfolio_data.keys())
     }
+
 
 if __name__ == "__main__":
     import uvicorn

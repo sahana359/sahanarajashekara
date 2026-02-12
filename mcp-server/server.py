@@ -260,7 +260,7 @@ Provide a detailed, engaging explanation of this project."""
 
 
 def main():
-    mcp.run(transport="sse")
+    mcp.run()
 
 if __name__ == "__main__":
     main()

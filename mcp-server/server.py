@@ -260,9 +260,7 @@ Provide a detailed, engaging explanation of this project."""
 
 
 def main():
-    import os
-    port = int(os.environ.get("PORT", 8000))
-    mcp.run(transport="sse", port=port)
+    mcp.run(transport="sse")
 
 if __name__ == "__main__":
     main()

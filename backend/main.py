@@ -20,22 +20,6 @@ IS_VERCEL = os.getenv("VERCEL") == "1"
 MCP_SERVER_URL = os.getenv("MCP_SERVER_URL", "")
 
 
-app = FastAPI(title="Portfolio Chat API", lifespan=lifespan)
-app.state.limiter = limiter
-app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "https://sahanarajashekara.vercel.app",
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 async def load_from_remote_mcp():
     """Load data from remote MCP server."""
     global portfolio_data
@@ -80,6 +64,23 @@ async def lifespan(app: FastAPI):
         print("No MCP_SERVER_URL - falling back to JSON files")
         load_json_data()
     yield
+
+
+app = FastAPI(title="Portfolio Chat API", lifespan=lifespan)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://sahanarajashekara.vercel.app",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 

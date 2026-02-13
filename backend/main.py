@@ -195,7 +195,6 @@ async def chat(request: Request, chat_request: ChatRequest):
             "content": chat_request.message
         })
 
-        # ✅ await async call
         response = await client.messages.create(
             model="claude-sonnet-4-20250514",
             max_tokens=1024,
@@ -206,8 +205,10 @@ async def chat(request: Request, chat_request: ChatRequest):
         return ChatResponse(response=response.content[0].text)
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
+        import traceback
+        error_detail = f"{type(e).__name__}: {str(e)}\n{traceback.format_exc()}"
+        print(error_detail)  # This should show in Vercel logs
+        raise HTTPException(status_code=500, detail=error_detail)
 
 @app.get("/health")
 async def health():

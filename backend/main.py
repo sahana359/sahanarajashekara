@@ -87,6 +87,20 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="Portfolio Chat API", lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "https://sahanarajashekara.vercel.app/",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 app.state.limiter = limiter
 
 
@@ -104,18 +118,6 @@ async def custom_rate_limit_handler(request: Request, exc: RateLimitExceeded):
         }
     )
 
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:3000",
-        "https://sahanarajashekara.vercel.app/",
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 # ✅ Use async Anthropics client
 client = AsyncAnthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))

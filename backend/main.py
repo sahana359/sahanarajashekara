@@ -110,7 +110,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://localhost:3000",
-        "https://sahanarajashekara.vercel.app",
+        "https://sahanarajashekara.vercel.app/",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -217,6 +217,12 @@ async def health():
         "rate_limit_storage": "redis" if REDIS_URL else "memory"
     }
 
+@app.get("/debug")
+async def debug():
+    return {
+        "portfolio_data_keys": list(portfolio_data.keys()),
+        "mcp_url": MCP_SERVER_URL or "not set",
+    }
 
 if __name__ == "__main__":
     import uvicorn

@@ -179,7 +179,7 @@ async def root():
 
 
 @app.post("/chat", response_model=ChatResponse)
-@limiter.limit("5/day")
+# @limiter.limit("5/day")
 async def chat(request: Request, chat_request: ChatRequest):
     try:
         messages = []

@@ -1,6 +1,39 @@
 {
   "projects": [
     {
+      "id": "donna-ai",
+      "name": "Donna AI",
+      "organization": "Personal Project",
+      "type": "personal",
+      "description": "A voice-powered AI personal assistant that automates daily tasks.",
+      "longDescription": "Architected an end-to-end AI Agent using Python (FastAPI) and Claude, implementing Model Context Protocol (MCP) to automate daily workflows across Gmail, Calendar, and Notion. Integrated OMI wearable hardware with a Pinecone vector database to enable real-time voice command processing and contextual memory, reducing administrative overhead through autonomous agentic task execution.",
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "Claude (Anthropic)",
+        "MCP",
+        "Pinecone",
+        "Gmail API",
+        "Google Calendar API",
+        "Notion API",
+        "OMI Wearable"
+      ],
+      "categories": ["AI", "Full Stack", "Voice Technology"],
+      "highlights": [
+        "Model Context Protocol integration for multi-service orchestration",
+        "Real-time voice command processing via OMI wearable",
+        "Vector database for contextual memory"
+      ],
+      "links": {
+        "github": "https://github.com/sahana359/donna-ai",
+        "live": null,
+        "demo": null
+      },
+      "primaryLink": "https://github.com/sahana359/donna-ai",
+      "image": null,
+      "featured": true
+    },
+    {
       "id": "music-recommender",
       "name": "Music Recommender System",
       "organization": "Northeastern University",
@@ -25,10 +58,11 @@
         "Spotify API integration"
       ],
       "links": {
-        "github": null,
-        "live": null,
-        "demo": null
+        "github": "https://github.com/sahana359/music-recommender",
+        "live": "https://music-recommender-demo.vercel.app/",
+        "demo": "https://www.youtube.com/watch?v=j7ncdhlwny4"
       },
+      "primaryLink": "https://music-recommender-demo.vercel.app/",
       "image": null,
       "featured": true
     },
@@ -57,8 +91,9 @@
       "links": {
         "github": null,
         "live": null,
-        "demo": null
+        "demo": "https://www.youtube.com/watch?v=x-iFtlAe_GA&t=1s"
       },
+      "primaryLink": "https://www.youtube.com/watch?v=x-iFtlAe_GA&t=1s",
       "featured": true
     },
     {
@@ -84,10 +119,11 @@
         "SMOTE for class imbalance"
       ],
       "links": {
-        "github": null,
+        "github": "https://github.com/sahana359/credit-card-lead-prediction",
         "live": null,
         "demo": null
       },
+      "primaryLink": "https://github.com/sahana359/credit-card-lead-prediction",
       "featured": false
     }
   ]

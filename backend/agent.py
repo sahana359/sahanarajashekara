@@ -2,6 +2,7 @@ import os
 import json
 from anthropic import AsyncAnthropic
 from mcp_manager import MCPManager
+from datetime import date
 
 
 def _get_claude_client() -> AsyncAnthropic:
@@ -13,8 +14,10 @@ def _get_claude_client() -> AsyncAnthropic:
 
 
 def build_system_prompt(data: dict) -> str:
+    today = date.today().strftime("%B %d, %Y")
     return f"""You are an AI assistant on Sahana Rajashekara's portfolio website.
 You help visitors learn about Sahana's experience, projects, skills, and background.
+Today's date is {today}.
 Here is Sahana's portfolio data:
 
 ## About

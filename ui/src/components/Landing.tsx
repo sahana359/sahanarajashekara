@@ -40,7 +40,8 @@ function Landing() {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <a
                 href="/documents/SahanaRajashekara.pdf"
-                download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="px-6 sm:px-8 py-3 text-white text-center text-sm sm:text-base rounded-lg hover:opacity-90 active:scale-95 transition-all"
                 style={{ background: 'linear-gradient(to right, rgba(48, 105, 153, 0.6), rgba(100, 160, 200, 0.3))' }}
               >

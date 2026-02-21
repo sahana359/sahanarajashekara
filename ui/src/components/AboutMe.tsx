@@ -22,7 +22,7 @@ function AboutMe() {
                             />
                             
                             {/* Social Links */}
-                            <div className="flex justify-center md:pl-7 gap-4 mt-6 items-center">
+                            <div className="flex justify-center gap-6 mt-6 items-center">
                                 <a 
                                     href={aboutData.contact.linkedin}
                                     target="_blank"

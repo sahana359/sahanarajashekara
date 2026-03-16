@@ -9,7 +9,7 @@
       "location": "Jammu and Kashmir, India",
       "date": "January, 2023",
       "description": "Completed skiing training at one of India's premier mountaineering institutes.",
-      "certification": "images/skiing_cert.heic",
+      "certification": "images/skiing_cert.jpeg",
       "images": ["images/skiing1.jpg","images/skiing2.jpg"]
     },
     {
@@ -21,7 +21,7 @@
       "location": "Bangalore, India",
       "date": "September, 2022",
       "description": "Learned canyoneering fundamentals including rappelling, navigation, and water safety.",
-      "certification": "images/canyoneering_cert.heic",
+      "certification": "images/canyoneering_cert.jpeg",
       "images": ["images/canyoneering1.jpeg", "images/canyoneering2.jpg"]
     }
   ]

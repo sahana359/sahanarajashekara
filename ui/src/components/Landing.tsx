@@ -1,9 +1,16 @@
 import aboutData from '../data/json/about.json';
 
 function Landing() {
+  const handleScrollDown = () => {
+    const container = document.querySelector('.snap-y');
+    if (container) {
+      container.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+    }
+  };
+
   return (
     <section
-      className="min-h-screen sm:h-screen snap-start bg-cover bg-center bg-no-repeat"
+      className="min-h-screen sm:h-screen snap-start bg-cover bg-center bg-no-repeat relative"
       style={{ backgroundImage: "url('/images/bg.png')" }}
     >
       <div className="h-full flex items-center px-4 sm:px-8 md:px-16 lg:px-32 py-20 sm:py-0">
@@ -58,6 +65,34 @@ function Landing() {
           </div>
         </div>
       </div>
+
+      {/* Scroll Indicator */}
+      <button
+        onClick={handleScrollDown}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 cursor-pointer group"
+        style={{ color: 'rgba(100, 160, 200, 0.7)' }}
+        aria-label="Scroll down"
+      >
+        {/* Mouse icon */}
+        <svg
+          className="w-6 h-9 opacity-70 group-hover:opacity-100 transition-opacity"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 36"
+          strokeWidth={1.5}
+        >
+          <rect x="5" y="1" width="14" height="22" rx="7" ry="7" />
+          <line x1="12" y1="6" x2="12" y2="10" strokeLinecap="round" />
+        </svg>
+        <svg
+          className="w-4 h-4 animate-bounce opacity-60 group-hover:opacity-100 transition-opacity"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
     </section>
   );
 }

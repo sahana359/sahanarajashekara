@@ -3,7 +3,7 @@
   "firstName": "Sahana",
   "lastName": "Rajashekara",
   "title": "Software Engineer",
-  "summary": "Hello! My name is Sahana. I'm focused on Full Stack Development, Agentic AI, and MCP. I'm passionate about building impactful products. I recently completed my Master's in Computer Science at Northeastern University.",
+  "summary": "Software Engineer with an MS in Computer Science from Northeastern University. 2+ years building scalable full-stack applications and user-facing products in fast-paced, high-impact environments.\n\nI build reliable, production-grade systems - from RESTful APIs and database design to distributed systems and cloud infrastructure. My stack spans Java (Spring Boot), Python (FastAPI, Flask), React/TypeScript, Node.js, SQL/NoSQL, and AWS, with experience in Docker and CI/CD pipelines.\n\nI also focus on building AI-powered applications: end-to-end pipelines, LLM orchestration, multimodal systems, MCP, RAG, and voice interfaces. Certified AI Engineer for Developers.",
   "location": "Boston, MA",
   "contact": {
     "email": "rajashekara.s@northeastern.edu",

@@ -1,71 +1,26 @@
 {
   "certificates": [
     {
-      "id": "supervised-ml",
-      "name": "Supervised Machine Learning: Regression and Classification",
-      "issuer": "Stanford University",
-      "platform": "Coursera",
-      "issueDate": "2025-07",
-      "credentialId": "3QWJSOHC6I09",
-      "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/3QWJSOHC6I09",
-      "skills": ["Regression", "Classification", "Supervised Learning"],
-      "category": "Machine Learning"
+      "id": "ai-engineer-developers",
+      "name": "AI Engineer for Developers Associate",
+      "issuer": "DeepLearning.AI",
+      "platform": "DataCamp",
+      "issueDate": "2026-04",
+      "credentialId": "AIEDA0012934785195",
+      "credentialUrl": "https://www.datacamp.com/certificate/AIEDA0012934785195",
+      "skills": ["OpenAI API", "LangChain", "HuggingFace", "LLMOps", "Pinecone", "Prompt Engineering"],
+      "category": "AI Engineering"
     },
     {
-      "id": "advanced-ml",
-      "name": "Advanced Learning Algorithms",
+      "id": "stanford-ml-specialization",
+      "name": "Stanford Machine Learning Specialization",
       "issuer": "Stanford University",
       "platform": "Coursera",
       "issueDate": "2025-09",
       "credentialId": "DP9O7DBBPBD3",
       "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/DP9O7DBBPBD3",
-      "skills": ["Machine Learning", "Neural Networks", "Deep Learning"],
+      "skills": ["NumPy", "Pandas", "TensorFlow", "Scikit-learn", "Supervised Learning", "Neural Networks"],
       "category": "Machine Learning"
-    },
-    {
-      "id": "codepath-interview-prep",
-      "name": "Intermediate Technical Interview Prep Course",
-      "issuer": "CodePath",
-      "platform": "CodePath",
-      "issueDate": "2025-08",
-      "credentialId": "109227",
-      "credentialUrl": null,
-      "skills": ["Algorithms", "Data Structures", "Interview Prep"],
-      "category": "Career Development"
-    },
-    
-    {
-      "id": "neu-ai-workplace",
-      "name": "Applying AI Technologies to the Workplace",
-      "issuer": "Northeastern University",
-      "platform": "Northeastern University",
-      "issueDate": "2024-09",
-      "credentialId": "66fac90f479ec67567a61d04",
-      "credentialUrl": "https://api.badgr.io/public/assertions/66fac90f479ec67567a61d04",
-      "skills": ["AI Applications", "Workplace AI"],
-      "category": "AI"
-    },
-    {
-      "id": "neu-leadership",
-      "name": "Graduate Leadership Institute",
-      "issuer": "Northeastern University",
-      "platform": "Northeastern University",
-      "issueDate": "2024-05",
-      "credentialId": "66509910c91792345ed4601f",
-      "credentialUrl": "https://api.badgr.io/public/assertions/66509910c91792345ed4601f",
-      "skills": ["Leadership", "Professional Development"],
-      "category": "Leadership"
-    },
-    {
-      "id": "neu-ai-literacy",
-      "name": "Introductory AI Literacy",
-      "issuer": "Northeastern University",
-      "platform": "Northeastern University",
-      "issueDate": "2024-04",
-      "credentialId": "66145b3afd37f661cb3c992f",
-      "credentialUrl": "https://api.badgr.io/public/assertions/66145b3afd37f661cb3c992f",
-      "skills": ["AI Fundamentals", "AI Literacy"],
-      "category": "AI"
     }
   ]
 }

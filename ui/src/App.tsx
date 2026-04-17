@@ -1,5 +1,4 @@
 import Header from './components/Header';
-import Landing from './components/Landing';
 import AboutMe from './components/AboutMe';
 import Education from './components/Education';
 import Experience from './components/Experience';
@@ -14,8 +13,6 @@ function App() {
   return (
     <div className="h-screen overflow-y-auto snap-y snap-mandatory">
       <Header />
-      <Landing />
-
       {/* Content Section - snaps, then scrolls normally inside */}
 
       <section

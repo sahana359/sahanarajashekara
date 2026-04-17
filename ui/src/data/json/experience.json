@@ -1,6 +1,6 @@
 {
   "experience": [
-     {
+    {
       "id": "mphasis-swe",
       "company": "Mphasis",
       "role": "Software Engineer",
@@ -9,95 +9,90 @@
       "location": "Bangalore, KA",
       "startDate": "September, 2021",
       "endDate": "December, 2023",
-      "description": "Engineered full-stack e-commerce web applications and led technology migrations.",
+      "description": "Developed and maintained full-stack e-commerce web applications and led technology migrations.",
       "responsibilities": [
-        "Engineered full-stack e-commerce web applications using Java, Svelte, Spring Boot, SOAP, and REST API",
-        "Led technology migration from Angular to Svelte, building the application from the ground up, resulting in a 45% reduction in build size of web components",
-        "Improved application performance by optimizing backend processing through multithreading and caching, achieving a 66% reduction in processing time",
-        "Developed UIaaS (User Interface as a Service) web components and backend REST APIs for full-tech product search with filtering, add-to-cart, pagination, and bulk document downloads for 500+ products",
-        "Implemented ESAPI (Enterprise Security API) library to mitigate XSS vulnerabilities, enhancing cybersecurity resilience"
+        "Developed and maintained full-stack e-commerce web applications using Java, React (TypeScript), Spring Boot, and REST APIs hosted on Azure App Service, with unit and integration testing via JUnit",
+        "Led a team of 3 engineers to migrate the frontend from Angular to React framework, building the application from the ground up, resulting in a 45% reduction in the build size of web components",
+        "Improved API response time by optimizing backend processing through the implementation of Azure Cache for Redis and multithreading, cutting latency by 66%; monitored performance using Dynatrace",
+        "Built and shipped a reusable micro-frontend component library (UIaaS) and supporting REST APIs for a product search platform, delivering advanced filtering, pagination, add-to-cart, and bulk document download across a catalog of 500+ products",
+        "Eliminated 12+ critical XSS (Cross-Site Scripting) vulnerabilities by implementing ESAPI (Enterprise Security API) in alignment with OWASP standards, significantly reducing security risk exposure"
       ],
       "technologies": [
         "Java",
-        "Svelte",
-        "Angular",
+        "React",
+        "TypeScript",
         "Spring Boot",
         "REST API",
-        "SOAP",
+        "Azure App Service",
+        "JUnit",
+        "Azure Cache for Redis",
         "Multithreading",
-        "Caching",
+        "Dynatrace",
         "ESAPI"
       ],
       "achievements": [
         {
           "metric": "45%",
-          "description": "Reduction in build size after Angular to Svelte migration"
+          "description": "Reduction in build size after Angular to React migration"
         },
         {
           "metric": "66%",
-          "description": "Reduction in processing time through backend optimization"
+          "description": "Reduction in API latency through Redis caching and multithreading"
+        },
+        {
+          "metric": "12+",
+          "description": "Critical XSS vulnerabilities eliminated via ESAPI"
         },
         {
           "metric": "500+",
-          "description": "Products supported in UIaaS components"
+          "description": "Products supported in UIaaS component library"
         }
       ]
     },
     {
-      "id": "neu-ta-cpp",
+      "id": "neu-ta",
       "company": "Northeastern University",
       "role": "Teaching Assistant",
-      "course": "Programming with C++",
+      "course": "Software Engineering, Programming in C++",
       "type": "part-time",
       "location": "Boston, MA",
       "startDate": "May, 2025",
-      "endDate": "June, 2025",
-      "description": "Teaching Assistant for C++ programming course, mentoring 100+ students.",
-      "responsibilities": [
-        "Led hands-on sessions demonstrating OpenCV techniques for image classification and manipulation using C++",
-        "Mentored over 100 students in modern C++ features and best coding practices",
-        "Hosted office hours and guided students through advanced C++ concepts including pointers, STL, OOP, UML, and multithreading",
-        "Graded weekly programming assignments and exercises via Linux server and Replit"
-      ],
-      "technologies": [
-        "C++",
-        "OpenCV",
-        "STL",
-        "Linux",
-        "Replit"
-      ],
-      "achievements": [
-        {
-          "metric": "100+",
-          "description": "Students mentored in modern C++ features"
-        }
-      ]
-    },
-    {
-      "id": "neu-ta-fse",
-      "company": "Northeastern University",
-      "role": "Teaching Assistant",
-      "course": "Fundamentals of Software Engineering",
-      "type": "part-time",
-      "location": "Boston, MA",
-      "startDate": "August, 2025",
       "endDate": "December, 2025",
-      "description": "Teaching Assistant for full-stack development course covering React, Express, and MongoDB.",
+      "description": "Teaching Assistant for Software Engineering and Programming in C++ courses.",
       "responsibilities": [
-        "Hosted office hours and guided students on full-stack development with React (TypeScript), Express, and MongoDB",
-        "Mentored student groups through sprint reviews and provided feedback on user stories and project deliverables",
-        "Developed starter code and created database schema design for assignments",
-        "Created test suites with Jest and Cypress to ensure backend APIs and frontend components functioned consistently and reliably"
+        "Developed full-stack application for coursework in the MERN (MongoDB, Express, React/TypeScript with Redux, Node.js) stack and built Jest and Cypress test suites, achieving 95% code coverage",
+        "Implemented CI/CD pipelines using GitHub Actions and Docker for containerized and efficient deployment",
+        "Guided 100+ students during office hours and led 4 project teams through Agile sprint planning, sprint reviews, and user story grooming using Scrum methodologies, resulting in a 100% on-time project delivery rate",
+        "Led hands-on sessions demonstrating OpenCV techniques using C++ for image classification and manipulation; guided 100+ students in modern C++ concepts and graded weekly programming assignments"
       ],
       "technologies": [
         "React",
         "TypeScript",
+        "Redux",
+        "Node.js",
         "Express",
         "MongoDB",
         "Jest",
-        "Cypress"
+        "Cypress",
+        "Docker",
+        "GitHub Actions",
+        "C++",
+        "OpenCV"
       ],
-      "achievements": []
+      "achievements": [
+        {
+          "metric": "95%",
+          "description": "Code coverage achieved with Jest and Cypress test suites"
+        },
+        {
+          "metric": "100%",
+          "description": "On-time project delivery rate across 4 Agile project teams"
+        },
+        {
+          "metric": "100+",
+          "description": "Students guided through office hours and C++ sessions"
+        }
+      ]
     }
   ]
 }

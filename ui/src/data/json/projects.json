@@ -1,28 +1,94 @@
 {
   "projects": [
     {
-      "id": "donna-ai",
-      "name": "Donna AI",
-      "organization": "Personal Project",
+      "id": "hangar-ai",
+      "name": "HangarAI",
+      "organization": "yconic Hackathon Winner – Advanced AI track",
       "type": "personal",
-      "description": "A voice-powered AI personal assistant that automates daily tasks.",
-      "longDescription": "Architected an end-to-end AI Agent using Python (FastAPI) and Claude, implementing Model Context Protocol (MCP) to automate daily workflows across Gmail, Calendar, and Notion. Integrated OMI wearable hardware with a Pinecone vector database to enable real-time voice command processing and contextual memory, reducing administrative overhead through autonomous agentic task execution.",
+      "description": "A multimodal AI platform guiding early-stage founders from raw idea to investor-ready pitch.",
+      "longDescription": "Built a multimodal AI platform that guides early-stage founders from raw idea to investor-ready pitch, designing a LangGraph orchestrated agent with Gemini API for ideation, market-aware assumption challenges, and Startup Manifest extraction. Developed a multi-agent pitch analysis pipeline using asyncio that concurrently processes vocal emotion (Hume AI prosody via WebSocket), visual presence (MediaPipe Tasks Vision), and speech transcript (Deepgram) into an investor-personalized feedback report across a FastAPI, React, and PostgreSQL stack, achieving <10s latency for a 2-minute pitch.",
       "technologies": [
         "Python",
         "FastAPI",
-        "Claude (Anthropic)",
+        "LangGraph",
+        "Gemini API",
+        "Hume AI",
+        "MediaPipe",
+        "Deepgram",
+        "React",
+        "PostgreSQL",
+        "asyncio",
+        "WebSocket"
+      ],
+      "categories": ["AI", "Multi-Agent", "Full Stack"],
+      "highlights": [
+        "LangGraph orchestrated multi-agent pipeline",
+        "Multimodal pitch analysis: vocal, visual, and speech",
+        "<10s latency for 2-minute pitch processing"
+      ],
+      "links": {
+        "github": "https://github.com/sahana359/HangarAI",
+        "live": null,
+        "demo": null
+      },
+      "primaryLink": "https://github.com/sahana359/HangarAI",
+      "image": null,
+      "featured": true
+    },
+    {
+      "id": "calm-ai",
+      "name": "CalmAI",
+      "organization": "Mindful Makers Hackathon",
+      "type": "personal",
+      "description": "An iOS mental wellness app that passively detects vocal distress and provides guided CBT/DBT interventions.",
+      "longDescription": "Built an iOS mental wellness app using SwiftUI that passively detects vocal distress via a real-time audio pipeline streamed over WebSocket to a FastAPI backend. Analyzed using Hume AI's speech prosody model and automatically notifies users with guided CBT (Cognitive Behavioral Therapy) and DBT (Dialectical Behavior Therapy) interventions.",
+      "technologies": [
+        "SwiftUI",
+        "FastAPI",
+        "Hume AI",
+        "WebSocket",
+        "Python",
+        "iOS"
+      ],
+      "categories": ["AI", "iOS", "Mental Health"],
+      "highlights": [
+        "Real-time vocal distress detection via Hume AI speech prosody",
+        "WebSocket audio pipeline from iOS to FastAPI backend",
+        "Automated CBT and DBT intervention delivery"
+      ],
+      "links": {
+        "github": "https://github.com/sahana359/Calm-AI",
+        "live": null,
+        "demo": null
+      },
+      "primaryLink": "https://github.com/sahana359/Calm-AI",
+      "image": null,
+      "featured": true
+    },
+    {
+      "id": "donna-ai",
+      "name": "DonnaAI",
+      "organization": "Personal Project",
+      "type": "personal",
+      "description": "A voice-powered AI productivity assistant that automates agentic workflows across Outlook, Calendar, and OneNote.",
+      "longDescription": "Built a voice-activated AI agent using Python (FastAPI) and the Claude API, applying prompt engineering and implementing MCP (Model Context Protocol) to automate agentic workflows across Outlook, Outlook Calendar, and OneNote via an iOS app (SwiftUI) and an OMI wearable device for hands-free, real-time voice command processing. Implemented RAG (Retrieval Augmented Generation) using Pinecone vector database for contextual memory storage and retrieval, enabling the assistant to personalize responses across sessions with <200ms retrieval latency.",
+      "technologies": [
+        "Python",
+        "FastAPI",
+        "Claude API",
         "MCP",
+        "SwiftUI",
         "Pinecone",
-        "Gmail API",
-        "Google Calendar API",
-        "Notion API",
-        "OMI Wearable"
+        "Outlook API",
+        "OneNote API",
+        "OMI Wearable",
+        "iOS"
       ],
       "categories": ["AI", "Full Stack", "Voice Technology"],
       "highlights": [
-        "Model Context Protocol integration for multi-service orchestration",
+        "MCP integration for multi-service orchestration across Outlook and OneNote",
         "Real-time voice command processing via OMI wearable",
-        "Vector database for contextual memory"
+        "<200ms retrieval latency with Pinecone vector database"
       ],
       "links": {
         "github": "https://github.com/sahana359/donna-ai",
@@ -39,7 +105,7 @@
       "organization": "Northeastern University",
       "type": "academic",
       "description": "A lyrics-based music recommendation system using NLP and machine learning techniques.",
-      "longDescription": "Built a lyrics-based recommender using HuggingFace SBERT (Sentence Transformers) embeddings, artist metadata, and audio features. Trained a Nearest Neighbors model achieving a mean similarity score of 0.878. Developed a Flask REST API for inference, integrated Spotify API for metadata, and designed a React + TypeScript frontend. Deployed end-to-end with Heroku (backend) and Netlify (frontend).",
+      "longDescription": "Built a lyrics-based recommender using HuggingFace SBERT (Sentence Transformers) embeddings, artist metadata, and audio features, training a Nearest Neighbors model achieving a mean similarity score of 0.878. Developed a Flask REST API to perform inference with trained models for song recommendations, integrated the Spotify API for song metadata, and designed the UI with React (TypeScript), delivering a complete end-to-end ML + full-stack solution.",
       "technologies": [
         "Python",
         "Flask",
@@ -48,14 +114,13 @@
         "HuggingFace",
         "SBERT",
         "Spotify API",
-        "Heroku",
-        "Netlify"
+        "Scikit-learn"
       ],
       "categories": ["Machine Learning", "NLP", "Full Stack"],
       "highlights": [
-        "Mean similarity score of 0.878",
+        "Mean similarity score of 0.878 with Nearest Neighbors model",
         "End-to-end ML + full-stack solution",
-        "Spotify API integration"
+        "Spotify API integration for song metadata"
       ],
       "links": {
         "github": "https://github.com/sahana359/music-recommender",
@@ -94,6 +159,7 @@
         "demo": "https://www.youtube.com/watch?v=x-iFtlAe_GA&t=1s"
       },
       "primaryLink": "https://www.youtube.com/watch?v=x-iFtlAe_GA&t=1s",
+      "image": null,
       "featured": true
     },
     {
@@ -124,6 +190,7 @@
         "demo": null
       },
       "primaryLink": "https://github.com/sahana359/credit-card-lead-prediction",
+      "image": null,
       "featured": false
     }
   ]
